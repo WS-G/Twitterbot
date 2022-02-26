@@ -18,7 +18,7 @@ print (user.screen_name)
 print (user.followers_count)
 
 search = "#infosec"
-numberOfTweets = 3
+numberOfTweets = 2
 
 def limit_handle(cursor):
   while True:
@@ -37,7 +37,7 @@ for follower in limit_handle(tweepy.Cursor(api.followers).items()):
 # like my own tweets & retweet certain tweets based on the keyword defined in 'search' var 
 for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):   
     try:
-        tweet.favorite()
+        tweet.retweet()
         print('Retweeted the tweet')
     except tweepy.TweepError as e:
         print(e.reason)
