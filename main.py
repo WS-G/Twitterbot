@@ -25,11 +25,11 @@ def limit_handle(cursor):
     try:
       yield cursor.next()
     except tweepy.RateLimitError:
-      time.sleep(1000)
+      time.sleep(400)
 
 # Follow people back
 for follower in limit_handle(tweepy.Cursor(api.followers).items()):
-  if follower.name == '':
+  if follower.followers_count <= 100: #only follow back people with over 100 followers 
     print(follower.name)
     follower.follow()
 
