@@ -17,8 +17,8 @@ print (user.name)
 print (user.screen_name)
 print (user.followers_count)
 
-search = "cybersecurity"
-numberOfTweets = 2
+search = "#infosec"
+numberOfTweets = 3
 
 def limit_handle(cursor):
   while True:
@@ -27,15 +27,15 @@ def limit_handle(cursor):
     except tweepy.RateLimitError:
       time.sleep(1000)
 
-#Be nice to your followers. Follow everyone!
+# Follow people back
 for follower in limit_handle(tweepy.Cursor(api.followers).items()):
-  if follower.name == 'Usernamehere':
+  if follower.name == '':
     print(follower.name)
     follower.follow()
 
 
-# Be a narcisist and love your own tweets. or retweet anything with a keyword!
-for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):
+# like my own tweets & retweet certain tweets based on the keyword defined in 'search' var 
+for tweet in tweepy.Cursor(api.search, search).items(numberOfTweets):   
     try:
         tweet.favorite()
         print('Retweeted the tweet')
